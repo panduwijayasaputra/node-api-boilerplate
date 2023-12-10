@@ -26,15 +26,17 @@ cd node-api-boilerplate
 npm install
 ```
 
-3. Set up your PostgreSQL database and update the DATABASE_URL in the .env file.
+3. Set up your PostgreSQL database
 
-4. Run the migrations:
+4. Update the DATABASE_URL, PORT, and JWT_SECRET in the .env.development file
+
+5. Run the migrations:
 
 ```bash
 npx prisma migrate dev
 ```
 
-5. Start the dev server:
+6. Start the dev server:
 
 ```bash
 npm run dev
@@ -62,13 +64,15 @@ Run tests using Jest:
 ```bash
 npm test
 ```
+
 ## API Documentation
-API documentation can be found in the __/docs__ directory
+
+API documentation can be found in the **/docs** directory
 
 ## Dependencies
 
 -   [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js.
--   [Typescript](https://www.typescriptlang.org/):  A typed superset of JavaScript that compiles to plain JavaScript.
+-   [Typescript](https://www.typescriptlang.org/): A typed superset of JavaScript that compiles to plain JavaScript.
 -   [Prisma](https://www.prisma.io/): Database toolkit for TypeScript and Node.js.
 -   [Joi](https://joi.dev/): Object schema validation.
 -   [Jest](https://jestjs.io/): Delightful JavaScript testing.
@@ -76,7 +80,9 @@ API documentation can be found in the __/docs__ directory
 -   [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken): JSON Web Token implementation.
 
 ## Contributing
+
 Feel free to open issues or submit pull requests. Contributions are welcome!
 
 ## License
+
 This project is licensed under the [MIT License](https://chat.openai.com/c/LICENSE).
