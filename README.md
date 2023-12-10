@@ -1,6 +1,6 @@
-# Node.js Express API Boilerplate
+# Node.js Express Typescript API Boilerplate
 
-This repository contains a Node.js API built with Express, using Prisma as the ORM, PostgreSQL as the database, Joi for validation, Jest for testing with Babel, and authentication packages including Bcrypt and Jsonwebtoken.
+This repository contains a Node.js API built with Express and TypeScript, using Prisma as the ORM, PostgreSQL as the database, Joi for validation, Jest for testing with Babel, and authentication packages including Bcrypt and JSON Web Tokens.
 
 ## Getting Started
 
@@ -16,13 +16,13 @@ Make sure you have the following installed:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/panduwijayasaputra/node-api-boilerplate.git
 ```
 
 2. Install the dependencies:
 
 ```bash
-cd your-repository
+cd node-api-boilerplate
 npm install
 ```
 
@@ -68,6 +68,7 @@ API documentation can be found in the __/docs__ directory
 ## Dependencies
 
 -   [Express](https://expressjs.com/): Fast, unopinionated, minimalist web framework for Node.js.
+-   [Typescript](https://www.typescriptlang.org/):  A typed superset of JavaScript that compiles to plain JavaScript.
 -   [Prisma](https://www.prisma.io/): Database toolkit for TypeScript and Node.js.
 -   [Joi](https://joi.dev/): Object schema validation.
 -   [Jest](https://jestjs.io/): Delightful JavaScript testing.
