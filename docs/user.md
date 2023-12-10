@@ -8,9 +8,9 @@ Request Body:
 
 ```json
 {
-    "email": "admin@gmail.com",
+    "email": "tester@gmail.com",
     "password": "password123;",
-    "name": "Admnistrator"
+    "name": "User Test"
 }
 ```
 
@@ -19,8 +19,8 @@ Reponse Body Success:
 ```json
 {
     "data": {
-        "email": "admin@gmail.com",
-        "name": "Administrator"
+        "email": "tester@gmail.com",
+        "name": "User Test"
     }
 }
 ```
@@ -41,7 +41,7 @@ Request Body:
 
 ```json
 {
-    "email": "admin@gmail.com",
+    "email": "tester@gmail.com",
     "password": "password123;"
 }
 ```
@@ -60,7 +60,7 @@ Response Body Error:
 
 ```json
 {
-    "error": "Wrong Password"
+    "error": "Wrong email or password"
 }
 ```
 

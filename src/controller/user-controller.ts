@@ -3,11 +3,20 @@ import userService from './../service/user-service';
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await userService.register(req.body);
+        const result = await userService.register(req);
         res.status(200).json({ data: result })
     } catch (e) {
         next(e)
     }
 }
 
-export default { register }
+const login = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await userService.login(req);
+        res.status(200).json({ data: result })
+    } catch (e) {
+        next(e)
+    }
+}
+
+export default { register, login }
