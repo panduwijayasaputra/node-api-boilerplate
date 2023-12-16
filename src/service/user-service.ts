@@ -1,13 +1,13 @@
 import { prismaClient } from '../application/database';
 import { ResponseError } from '../error/response-error';
-import { loginUserValidation, registerUserValidation } from '../validation/user-validation';
-import { validate } from '../validation/validation';
+import { getUserValidation, loginUserValidation, registerUserValidation } from '../validation/user-validation';
+import { validateRequest, validateString } from '../validation/validation';
 import bcrypt from 'bcrypt';
 import { Request } from 'express';
 import jwt from 'jsonwebtoken'
 
 const register = async (request: Request) => {
-    const user = validate(registerUserValidation, request);
+    const user = validateRequest(registerUserValidation, request);
 
     const countUser = await prismaClient.user.count({
         where: {
@@ -29,18 +29,20 @@ const register = async (request: Request) => {
 }
 
 const login = async (request: Request) => {
-    const loginRequest = validate(loginUserValidation, request);
+    const loginRequest = validateRequest(loginUserValidation, request);
 
     const user = await prismaClient.user.findUnique({
         where: {
             email: loginRequest.email
         },
         select: {
+            id: true,
             email: true,
             name: true,
             password: true
         }
     });
+
 
     if (!user) {
         throw new ResponseError(401, 'Wrong username or password');
@@ -48,6 +50,7 @@ const login = async (request: Request) => {
 
     const { password, ...userData } = user;
     const isPasswordValid = await bcrypt.compare(loginRequest.password, password);
+
 
     if (!isPasswordValid) {
         throw new ResponseError(401, 'Wrong username or password');
@@ -60,6 +63,27 @@ const login = async (request: Request) => {
     return { token }
 }
 
+const get = async (id: string) => {
+    const requestId = validateString(getUserValidation, id);
+
+    const user = await prismaClient.user.findUnique({
+        where: { id: requestId }, select: {
+            id: true,
+            email: true,
+            name: true
+        }
+    });
+
+    if (!user) {
+        throw new ResponseError(401, 'Wrong username or password');
+    }
+
+    return user;
+}
+
+const getList = async () => {
+    return await prismaClient.user.findMany({ select: { id: true, email: true, name: true } });
+}
 
 
-export default { register, login }
+export default { register, login, get, getList }
