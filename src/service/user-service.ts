@@ -1,6 +1,7 @@
+import { User } from '@prisma/client';
 import { prismaClient } from '../application/database';
 import { ResponseError } from '../error/response-error';
-import { getUserValidation, loginUserValidation, registerUserValidation } from '../validation/user-validation';
+import { getUserValidation, loginUserValidation, registerUserValidation, updateUserValidation } from '../validation/user-validation';
 import { validateRequest, validateString } from '../validation/validation';
 import bcrypt from 'bcrypt';
 import { Request } from 'express';
@@ -75,7 +76,7 @@ const get = async (id: string) => {
     });
 
     if (!user) {
-        throw new ResponseError(401, 'Wrong username or password');
+        throw new ResponseError(401, 'User not found');
     }
 
     return user;
@@ -85,5 +86,25 @@ const getList = async () => {
     return await prismaClient.user.findMany({ select: { id: true, email: true, name: true } });
 }
 
+const update = async (id: string, request: Request) => {
 
-export default { register, login, get, getList }
+    const user = validateRequest(updateUserValidation, request);
+
+    const userCount = await prismaClient.user.count({
+        where: {
+            id
+        }
+    });
+
+    if (!!userCount) {
+        throw new ResponseError(401, 'User not found');
+    }
+
+    return await prismaClient.user.update({
+        where: {id},
+        data: user
+    })
+}
+
+
+export default { register, login, get, getList, update }

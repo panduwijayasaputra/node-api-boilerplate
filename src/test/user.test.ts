@@ -153,14 +153,14 @@ describe('GET /api/users/current', () => {
     });
 
     it('Should return current user', async () => {
+    });
 
-        // const result = await supertest(web)
-        //     .get('/api/users/current')
-        //     .set('Authorization', token);
+    it('Should reject if no token provided', async () => {
+        const result = await supertest(web)
+            .get('/api/users/current');
 
-        // expect(result.status).toBe(200);
-        // expect(result.body.data.password).toBeUndefined();
-        // expect(result.body.data.email).toBe('tester@gmail.com');
-        // expect(result.body.data.name).toBe('User Test');
+        expect(result.status).toBe(401);
+        expect(result.body.error).toBeDefined();
+        expect(result.body.error).toBe('Unauthorized');
     });
 })

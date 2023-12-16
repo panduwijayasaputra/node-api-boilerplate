@@ -20,7 +20,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-const get = async (req: Request, res: Response, next: NextFunction) => {
+const getCurrent = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.context.tokenData.id;
         const result = await userService.get(id);
@@ -30,13 +30,33 @@ const get = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-const getAll =async (req:Request, res: Response, next: NextFunction) => {
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await userService.getList();
-        res.status(200).json({data: result})
+        res.status(200).json({ data: result })
     } catch (e) {
         next(e)
     }
 }
 
-export default { register, login, get, getAll }
+const getById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+        const result = await userService.get(userId);
+        res.status(200).json({ data: result })
+    } catch (e) {
+        next(e);
+    }
+}
+
+const update = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+        const result = await userService.update(userId, req);
+        res.status(200).json({ data: result })
+    } catch (e) {
+        next(e);
+    }
+}
+
+export default { register, login, getCurrent, getAll, getById, update }
